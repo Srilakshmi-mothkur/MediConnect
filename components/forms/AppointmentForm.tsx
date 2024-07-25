@@ -72,11 +72,13 @@ const AppointmentForm = ({
                     note: values.note,
                     status: status as Status,
                 }
-                const appointment = await createAppointment(appointmentData)
+                const newAppointment = await createAppointment(appointmentData)
 
-                if (appointment) {
-                    form.reset();
-                    router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.id}`)
+                if(newAppointment){
+                    form.reset()
+                    router.push(`/patients/${userId}/new-appointment/success?appointmentId=${newAppointment.$id}`);
+                }else{
+                    console.error('Failed to create appointment');
                 }
             }
 
